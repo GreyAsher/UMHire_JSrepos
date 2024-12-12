@@ -1,0 +1,140 @@
+﻿<Window x:Class="Project_Polished_Version.Company_DashBoard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Polished_Version"
+        mc:Ignorable="d"
+        Title="Company_DashBoard" Height="670" Width="1000">
+    <Border Background="#274D60" Height="460">
+        <Grid Margin="0,-97,0,-97">
+            <Grid.Background>
+                <ImageBrush Stretch="None" ImageSource="Images/Blue.jpg" AlignmentY="Top" AlignmentX="Center"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <!-- Adjusted proportions -->
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <!-- Adjusted for new height -->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel
+                Grid.Row="1" Margin="0,3,0,0">
+                <RadioButton x:Name="Profile_RB"
+                    Content="Profile"
+                    Height="40"
+                    Foreground="White"
+                    FontSize="14"
+                    Style="{StaticResource MenuButtons}" Click="Click_Profile" Margin="-30,45,0,0" />
+                <RadioButton 
+                    x:Name="Pending_Applications_RB"
+                    Content="Explore"
+                    Height="40"
+                    Foreground="White"
+                    FontSize="14"
+                    Style="{StaticResource MenuButtons}" Margin="-30,15,0,0"/>
+                <RadioButton 
+                    x:Name="Notifications_RB"
+                    Content="Notifications"
+                    Height="40"
+                    Foreground="White"
+                    FontSize="14"
+                    Style="{StaticResource MenuButtons}" Margin="-30,15,0,0" />
+                <RadioButton 
+                    x:Name="Messages_RB"
+                    Content="Messages"
+                    Height="40"
+                    Foreground="White"
+                    FontSize="14"
+                    Style="{StaticResource MenuButtons}" Margin="-30,15,0,0" Checked="Messages_RB_Checked"/>
+
+                <Grid Margin="10,200,10,0">
+                    <RadioButton 
+                        x:Name="Log_Out_RB"
+                        Content="Log Out"
+                        Height="30"
+                        Foreground="White"
+                        FontSize="12"
+                        Style="{StaticResource MenuButtons}" Margin="-30,15,-7,33" Click="Log_out_btn"/>
+                </Grid>
+            </StackPanel>
+
+            <ListBox Name="DropdownList" 
+                     Grid.Row="1" 
+                     Visibility="Collapsed" Grid.ColumnSpan="2" Margin="0,0,343,0"/>
+
+            <Grid/>
+
+            <Grid Grid.Column="1">
+                <Grid>
+                    <Grid Height="100" VerticalAlignment="Top">
+                        <ListBox Name="SearchResultsListBox" Height="400" VerticalAlignment="Top" Margin="10,40,10,10" Visibility="Collapsed" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- Newsfeed Section -->
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,-20,10,0" VerticalAlignment="Top" Grid.ColumnSpan="3">
+
+                <TextBlock Text="Applicant Avilable" 
+                           FontSize="16" 
+                           FontWeight="Bold" 
+                           Foreground="White" 
+                           Margin="0,-0,0,10" Height="30" VerticalAlignment="Center"/>
+                <ListBox x:Name="Newsfeed_ListBox"
+                         Background="White"
+                         Foreground="White"
+                         BorderThickness="0"
+                         Margin="0,0,0,10"
+                         Padding="5"
+                         HorizontalContentAlignment="Stretch"
+                         Height="490" Width="800">
+                    <!-- Additional newsfeed items can be dynamically added here -->
+                    <!-- Sample Newsfeed Items -->
+                    <ListBoxItem x:Name="LBI_name"/>
+                </ListBox>
+
+                <!-- User Input for Adding Newsfeed Items -->
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Button Content="Add News"
+                            Width="100"
+                            Height="25" Margin="700,-5,0,0"
+                            />
+                </StackPanel>
+            </StackPanel>
+            <Button x:Name="a_search" 
+                Grid.Column="3" 
+                Content="Search for applicants" 
+                HorizontalAlignment="Left" 
+                Background="Transparent" 
+                Foreground="White" 
+                Margin="110,0,0,0" 
+                VerticalAlignment="Center" 
+                Width="110" 
+                Height="25" 
+                FontSize="10" Click="application_btn">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                  VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Image Source="Images/Logo.png" HorizontalAlignment="Left" Height="120" VerticalAlignment="Top" Width="126" Grid.RowSpan="2"/>
+        </Grid>
+    </Border>
+
+</Window>
+

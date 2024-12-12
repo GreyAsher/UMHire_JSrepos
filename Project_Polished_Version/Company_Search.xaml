@@ -1,0 +1,36 @@
+﻿<Window x:Class="Project_Polished_Version.Company_Search"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Polished_Version"
+        mc:Ignorable="d"
+        Title="Company_Search" Height="670" Width="1000">
+    <Grid>
+        <!-- Define Layout Grid -->
+        <Grid.Background>
+            <ImageBrush Stretch="None" ImageSource="Images/BlueZoom.jpg" AlignmentY="Top" AlignmentX="Center"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <!-- Job List Section -->
+            <ColumnDefinition Width="0*"/>
+            <!-- Job Details Section -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Job List Section -->
+        <Border CornerRadius="15" Background="#F9F9F9" Margin="30,30,30,30">
+            <StackPanel Grid.Column="0" Margin="10,10,10,10" Background="#F9F9F9">
+                <Button Content="Back" Click="Back_Button" Width="68" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Name="ApplyNowButton" Content="View Profile" HorizontalAlignment="Center" Background="#0078D7" Foreground="White" Padding="10" Margin="0,20,0,0" Click="viewProfile_btn" />
+                <TextBox Name="SearchBox"  Margin="0,50,0,10" Padding="10" BorderBrush="Gray" BorderThickness="1" TextChanged="SearchBox_txtchange" />
+                <ListBox x:Name="CompanyListBox" Margin="0,10" Background="White" BorderBrush="LightGray" BorderThickness="1" Height="346" SelectionChanged="Company_Profile"
+                   >
+                    <!-- Sample items dynamically populated from code -->
+                </ListBox>
+            </StackPanel>
+        </Border>
+
+        <!-- Job Details Section -->
+    </Grid>
+</Window>
