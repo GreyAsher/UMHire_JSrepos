@@ -236,6 +236,7 @@
     <Compile Include="Friend_List_Window.xaml.cs">
       <DependentUpon>Friend_List_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Job_Available.xaml.cs" />
     <Compile Include="Messages.xaml.cs">
       <DependentUpon>Messages.xaml</DependentUpon>
     </Compile>
@@ -394,6 +395,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\ARTBLUE.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UMHIREICON.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

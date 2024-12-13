@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Polished_Version"
         mc:Ignorable="d"
-        Title="Inbox" Height="450" Width="800">
+        Title="Company_DashBoard" Height="670" Width="1000"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="AliceBlue"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>

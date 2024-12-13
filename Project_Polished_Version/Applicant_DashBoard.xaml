@@ -6,7 +6,8 @@
         mc:Ignorable="d"
         Height="670"
         Width="1000"
-        WindowStyle="None"
+        Title="UM HIRE"
+        Icon="Images/UMHIREICON.ico"
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
@@ -21,9 +22,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <!-- Adjusted proportions -->
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="425*"/>
+                <ColumnDefinition Width="85*"/>
+                <ColumnDefinition Width="56*"/>
+                <ColumnDefinition Width="283*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -70,7 +72,7 @@
                         Height="60"
                         Foreground="White"
                         FontSize="14"
-                        Style="{StaticResource MenuButtons}" Click="Log_Out_Button" Margin="-40,59,-10,-75" Width="180"/>
+                        Style="{StaticResource MenuButtons}" Click="Log_Out_Button" Margin="-40,60,-10,-75" Width="180"/>
                 </Grid>
             </StackPanel>
 
@@ -91,7 +93,7 @@
             </Grid>
 
             <!-- Newsfeed Section -->
-            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,50,10,0" VerticalAlignment="Top" Grid.ColumnSpan="3">
+            <StackPanel Grid.Column="1" Grid.Row="1" Margin="10,50,10,0" VerticalAlignment="Top" Grid.ColumnSpan="4">
 
                 <TextBlock Text="Community Post" 
                            FontSize="16" 
@@ -100,7 +102,7 @@
                            Height="30" Margin="0,-50,0,0"/>
                 <Border CornerRadius="10" BorderBrush="LightGray" BorderThickness="1" Padding="5" Height="479" Width="810">
                     <ListBox x:Name="Newsfeed_ListBox" Background="AliceBlue" Foreground="Black" BorderThickness="0" 
-                        HorizontalContentAlignment="Stretch">
+                        HorizontalContentAlignment="Stretch" Width="800" Height="470">
                         <!-- Additional newsfeed items can be dynamically added here -->
                         <!-- Sample Newsfeed Items -->
                         <ListBoxItem x:Name="LBI_name"/>
@@ -113,7 +115,7 @@
 
                 </StackPanel>
             </StackPanel>
-            <Button Grid.Column="3" Content="Add News"
+            <Button Grid.Column="4" Content="Add News"
                 Height="25"
                 VerticalAlignment="Top"
                 Click="Add_Post"
@@ -145,7 +147,7 @@
                 Click="searchJobs_btn" 
                 Height="26" 
                 FontSize="10" 
-                Grid.ColumnSpan="2">
+                Grid.ColumnSpan="3">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
@@ -160,7 +162,7 @@
             </Button>
 
             <Button x:Name="a_search" 
-                Grid.Column="3" 
+                Grid.Column="4" 
                 Content="Search for applicants" 
                 HorizontalAlignment="Left" 
                 Background="Transparent" 
@@ -185,12 +187,12 @@
             </Button>
 
             <Button x:Name="c_search" 
-                Grid.Column="2" 
+                Grid.Column="3" 
                 Content="Search for Companies" 
                 HorizontalAlignment="Left" 
                 Background="Transparent" 
                 Foreground="White" 
-                Margin="135,0,0,0" 
+                Margin="50,0,0,0" 
                 VerticalAlignment="Center" 
                 RenderTransformOrigin="0.575,-0.017" 
                 Width="110" 
