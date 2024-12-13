@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Polished_Version"
         mc:Ignorable="d"
-        Title="Applicant_Tracker" Height="450" Width="800"
-        WindowStyle="None"
+        Height="670" Width="1000"
+        Title="UM HIRE"
+        Icon="Images/UMHIREICON.ico"
         AllowsTransparency="True"
         Background="AliceBlue"
         ResizeMode="NoResize"
@@ -23,7 +24,7 @@
                 <ImageBrush Stretch="None" ImageSource="Images/BlueZoom.jpg" AlignmentY="Top" AlignmentX="Center"/>
             </Border.Background>
             <StackPanel Orientation="Horizontal" Background="Transparent">
-                <TextBlock Text="Applicant Tracking" Foreground="White" FontSize="24" VerticalAlignment="Center" TextAlignment="Center" Width="800"/>
+                <TextBlock Text="Applicant Tracking" Foreground="White" FontSize="24" VerticalAlignment="Center" TextAlignment="Center" Width="1000"/>
             </StackPanel>
         </Border>
 
@@ -51,7 +52,7 @@
                 </ListView>
             </Border>
             <Button x:Name="Back_Btn" Content="Back" HorizontalAlignment="Left" Margin="-9,-68,0,0" VerticalAlignment="Top" 
-                Click="Back_Btn_Click" Width="58">
+                Click="Back_Btn_Click" Width="58" Height="20">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 

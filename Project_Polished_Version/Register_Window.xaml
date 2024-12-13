@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Polished_Version"
         mc:Ignorable="d"
-        Title="Register_Window" Height="670" Width="1000">
+        Title="UM HIRE" Height="670" Width="1000"
+       
+        Background="AliceBlue"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Icon="Images/UMHIREICON.ico">
     <Grid Background="AliceBlue">
         <!-- Left Section -->
         <Grid.ColumnDefinitions>

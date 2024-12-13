@@ -5,7 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Polished_Version"
         mc:Ignorable="d"
-        Title="SearchJob_Window" Height="670" Width="1000">
+        Title="UM HIRE"
+        Icon="Images/UMHIREICON.ico"
+        Height="670" Width="1000"
+        AllowsTransparency="True"
+        Background="AliceBlue"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <!-- Define Layout Grid -->
         <Grid.Background>

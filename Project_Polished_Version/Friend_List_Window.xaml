@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Polished_Version"
         mc:Ignorable="d"
-        Title="Friend_List_Window" Height="450" Width="800">
-    <Grid>
+        Height="670" Width="1000"
+        Title="UM HIRE"
+        Icon="Images/UMHIREICON.ico"
+        AllowsTransparency="True"
+        Background="AliceBlue"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+            <Grid>
         <Grid.Background>
             <ImageBrush Stretch="None" ImageSource="Images/Blue.jpg" AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
