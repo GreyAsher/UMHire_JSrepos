@@ -1,5 +1,4 @@
-﻿
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using Project_Polished_Version.Classes;
 using System;
 using System.Collections.Generic;
@@ -13,19 +12,21 @@ namespace Project_Polished_Version
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string _connection = "Server=127.0.0.1;Database=project_database;UserID=root;Password=SQLDatabase404;";
         private readonly MySqlConnection connection;
         public static Dictionary<string, ApplicantUser> userAccounts;
         public static Dictionary<int, ApplicantUser> userAccountsGetID = new Dictionary<int, ApplicantUser>();
         public static Dictionary<int, CompanyUser> companyAccountsGetID = new Dictionary<int, CompanyUser>();
         public static Dictionary<string, CompanyUser> companyAccounts;
-        public static int userID;
+        public static int UserID;
         public static int CompanyID;
+        public static string UserEmail;
         public MainWindow()
         {
             InitializeComponent();
 
             // Initialize database connection
-            connection = new MySqlConnection("Server=127.0.0.1;Database=project_database;UserName=root;Password=SQLDatabase404");
+            connection = new MySqlConnection(_connection);
 
             // Initialize account data stores
             userAccounts = new Dictionary<string, ApplicantUser>(StringComparer.OrdinalIgnoreCase);
@@ -149,29 +150,63 @@ namespace Project_Polished_Version
 
         private void Log_In_Button_Click(object sender, RoutedEventArgs e)
         {
-
-            string sanitizedUsername = UsernameTextBox.Text.Trim();
-            string sanitizedPassword = PasswordTxtBox.Password;
-
-            if (AuthenticateUser(sanitizedUsername, sanitizedPassword, out int id, out bool isCompany))
+            try
             {
-                if (isCompany)
+                string sanitizedUsername = UsernameTextBox.Text.Trim();
+                string sanitizedPassword = PasswordTxtBox.Password;
+
+                if (AuthenticateUser(sanitizedUsername, sanitizedPassword, out int id, out bool isCompany))
                 {
-                    // Navigate to company dashboard
-                    CompanyID = id;
-                    new Company_DashBoard().Show();
+                    if (isCompany)
+                    {
+                        // Navigate to company dashboard
+                        CompanyID = id;
+                        new Company_DashBoard().Show();
+                    }
+                    else
+                    {
+                        // Navigate to user dashboard
+                        UserEmail = sanitizedUsername;
+                        UserID = id;
+                        new Applicant_DashBoard().Show();
+                    }
+                    this.Hide();
                 }
                 else
                 {
-                    // Navigate to user dashboard
-                    userID = id;
-                    new Applicant_DashBoard().Show();
+                    MessageBox.Show("Invalid username or password.");
                 }
-                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Show: " + ex.Message);
+            }
+        }
+
+        private void Register_Button_Click_Company(object sender, RoutedEventArgs e)
+        {
+            Register_Company rc = new Register_Company();
+            this.Hide();
+            rc.Show();
+        }
+
+        private void unhashed_Click(object sender, RoutedEventArgs e)
+        {
+            if (PasswordTxtBox.Visibility == Visibility.Visible)
+            {
+                Password.Text = PasswordTxtBox.Password;
+                Password.Visibility = Visibility.Visible;
+                PasswordTxtBox.Visibility = Visibility.Collapsed;
+
+                UnhashedPassword.Content = "Show Password";
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                PasswordTxtBox.Password = Password.Text;
+                Password.Visibility = Visibility.Collapsed;
+                PasswordTxtBox.Visibility = Visibility.Visible;
+
+                UnhashedPassword.Content = "Hide Password";
             }
         }
     }

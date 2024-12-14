@@ -11,7 +11,6 @@
         WindowStartupLocation="CenterScreen"
         Icon="Images/UMHIREICON.ico">
     <Grid>
-
         <Grid.Background>
             <ImageBrush Stretch="None" ImageSource="Images/Blue.jpg" AlignmentY="Top" AlignmentX="Right"/>
         </Grid.Background>
@@ -27,21 +26,32 @@
                 <Image Source="Images/LOGO.png" Height="140" Width="175"/>
                 <TextBlock Text="SignUp Now To Connect With Us!" FontSize="14" Foreground="White" HorizontalAlignment="Center" Margin="0,100,0,20"/>
                 <Border CornerRadius="20" BorderBrush="LightGray" BorderThickness="1" Background="Transparent" HorizontalAlignment="Center" Margin="0">
-                    <Button Content="SignUp" Height="40" Width="100" 
+                    <Button Content="SignUp as applicant" Height="40" Width="136"  Margin="0,0,0,0"
                         Background="Transparent" 
                         Foreground="White" 
                         FontWeight="Bold" 
                         BorderBrush="White" 
                         BorderThickness="0" 
                         Click="Register_Button_Click"
-                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
+                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+                </Border>
+                <Border CornerRadius="20" BorderBrush="LightGray" BorderThickness="1" Background="Transparent" HorizontalAlignment="Center" Margin="0">
+                    <Button Content="SignUp as Company" Height="40" Width="136"  Margin="0,0,0,0"
+                        Background="Transparent" 
+                        Foreground="White" 
+                        FontWeight="Bold" 
+                        BorderBrush="White" 
+                        BorderThickness="0" 
+                        Click="Register_Button_Click_Company"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+                </Border>
             </StackPanel>
         </Border>
 
         <!-- Sign In Section -->
-        <Border Grid.Column="1" Background="AliceBlue" Padding="20" VerticalAlignment="Stretch">
+        <Border Grid.Column="1" Background="White" Padding="20" VerticalAlignment="Stretch">
             <StackPanel>
                 <TextBlock Text="Sign In" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
@@ -91,11 +101,15 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <Image Source="Images/passwordIcon.png" Width="20" Height="20" Margin="25,0,5,0"/>
                         <Border CornerRadius="5" Background="White" BorderBrush="Gray" BorderThickness="1" Width="270" Height="25">
-                            <PasswordBox Width="260" Height="23" 
+                            <PasswordBox  Width="260" Height="23" 
                              Background="Transparent" 
                              BorderThickness="0" 
                              VerticalContentAlignment="Center" 
                              x:Name="PasswordTxtBox"/>
+                        </Border>
+                        <Border CornerRadius="5" Background="White" BorderBrush="Gray" BorderThickness="1" Width="270" Height="25">
+                            <TextBox x:Name="Password" Visibility="Collapsed" IsReadOnly="True" Width="260" Height="23" 
+                                  Background="Transparent" VerticalContentAlignment="Center" BorderThickness="0"/>
                         </Border>
 
                     </StackPanel>
@@ -108,7 +122,10 @@
                      FontWeight="Bold" 
                      Click="Log_In_Button_Click" 
                      BorderThickness="0"/>
+
                 </Border>
+
+                <Button x:Name="UnhashedPassword" Content="Show Password" Margin="50,0,50,0" Click="unhashed_Click"></Button>
             </StackPanel>
         </Border>
     </Grid>

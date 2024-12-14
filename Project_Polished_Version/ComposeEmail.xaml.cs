@@ -65,7 +65,7 @@ namespace Project_Polished_Version
                 MessageBox.Show($"Error: Please ensure the recipient's email address is correct.");
             }
             catch (Exception ex)
-            {         
+            {
                 MessageBox.Show($"An error occurred: {ex.Message}\nPlease check your internet connection or firewall settings.");
             }
         }

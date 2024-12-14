@@ -21,6 +21,7 @@ namespace Project_Polished_Version
     /// </summary>
     public partial class Applicant_Tracker : Window
     {
+        private static string Connection = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
         private List<Resume> list;
         public Applicant_Tracker()
         {
@@ -31,9 +32,7 @@ namespace Project_Polished_Version
         private List<Resume> GetResumeFromDatabase()
         {
             List<Resume> pendingFeed = new List<Resume>();
-            using (MySqlConnection connection = new MySqlConnection("Server=127.0.0.1;" +
-                "Database=project_database;UserName=root;" +
-                "Password=SQLDatabase404"))
+            using (MySqlConnection connection = new MySqlConnection(Connection))
             {
                 try
                 {
@@ -53,7 +52,7 @@ namespace Project_Polished_Version
                                 userProfile = reader["Profile_Name"].ToString(),
                                 Resume_Job_Position = reader["Position"].ToString(),
                                 Company_Name = reader["Company_Name"].ToString(),
-                                Submitted_Date = DateTime.Now, 
+                                Submitted_Date = DateTime.Now,
                             };
                             pendingFeed.Add(item);
                         }
@@ -67,27 +66,27 @@ namespace Project_Polished_Version
             return pendingFeed;
         }
 
-      
-            private void Rclass()
+
+        private void Rclass()
+        {
+            list = new List<Resume>();
+
+            foreach (var x in GetResumeFromDatabase())
             {
-                list = new List<Resume>();
-
-                foreach (var x in GetResumeFromDatabase())
+                if (x.Applicantion_Id == MainWindow.UserID)
                 {
-                    if (x.Applicantion_Id == MainWindow.userID)
-                    {
-                        list.Add(x);
-                    }
-                }
-
-                Job_Sent_Table.ItemsSource = list;
-
-                if (list.Count == 0)
-                {
-                    MessageBox.Show("No data found for the current user.");
+                    list.Add(x);
                 }
             }
-        
+
+            Job_Sent_Table.ItemsSource = list;
+
+            if (list.Count == 0)
+            {
+                MessageBox.Show("No data found for the current user.");
+            }
+        }
+
 
         private void Back_Btn_Click(object sender, RoutedEventArgs e)
         {

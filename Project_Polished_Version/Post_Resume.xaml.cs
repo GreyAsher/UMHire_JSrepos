@@ -43,11 +43,11 @@ namespace Project_Polished_Version
                 switch (PostTracker)
                 {
                     case 1:
-                        name = MainWindow.userAccountsGetID[MainWindow.userID].First_Name + " " +
-                               MainWindow.userAccountsGetID[MainWindow.userID].Last_Name;
+                        name = MainWindow.userAccountsGetID[MainWindow.UserID].First_Name + " " +
+                               MainWindow.userAccountsGetID[MainWindow.UserID].Last_Name;
                         break;
                     case 2:
-                        name = MainWindow.companyAccountsGetID[MainWindow.userID].CompanyName;
+                        name = MainWindow.companyAccountsGetID[MainWindow.UserID].CompanyName;
                         break;
                 }
 
@@ -73,7 +73,7 @@ namespace Project_Polished_Version
                     using (MySqlCommand insertCommand = new MySqlCommand(insertQuery, connection))
                     {
                         insertCommand.Parameters.AddWithValue("@content", PostTextBox.Text);
-                        insertCommand.Parameters.AddWithValue("@user_id", MainWindow.userID);
+                        insertCommand.Parameters.AddWithValue("@user_id", MainWindow.UserID);
                         insertCommand.Parameters.AddWithValue("@post_id", postedId);
                         insertCommand.Parameters.AddWithValue("@created_at", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                         insertCommand.Parameters.AddWithValue("@company_name", name);
@@ -114,4 +114,5 @@ namespace Project_Polished_Version
         }
     }
 }
+
 

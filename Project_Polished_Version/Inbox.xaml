@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Company_DashBoard" Height="670" Width="1000"
         WindowStyle="None"
-        AllowsTransparency="True"
         Background="AliceBlue"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">

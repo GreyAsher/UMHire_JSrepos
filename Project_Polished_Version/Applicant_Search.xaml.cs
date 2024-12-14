@@ -3,16 +3,7 @@ using Project_Polished_Version.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Project_Polished_Version
 {
@@ -21,29 +12,35 @@ namespace Project_Polished_Version
     /// </summary>
     public partial class Applicant_Search : Window
     {
+        private static string Connection = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
         private List<ApplicantUser> allUsers = new List<ApplicantUser>();
         public static int WindowTracker;
+
         public Applicant_Search()
         {
             InitializeComponent();
             PopulateListBox();
         }
+
         private void PopulateListBox()
         {
-            allUsers = User_DataBase();
+            int loggedInUserId = MainWindow.UserID; // Get the logged-in user's ID
+            allUsers = User_DataBase(loggedInUserId); // Fetch users except the logged-in user
             JobList.ItemsSource = allUsers;
         }
-        public static List<ApplicantUser> User_DataBase()
+
+        public static List<ApplicantUser> User_DataBase(int excludeUserId)
         {
             List<ApplicantUser> applicantFeed = new List<ApplicantUser>();
-            using (MySqlConnection connection = new MySqlConnection("Server=127.0.0.1;" + "Database=project_database;UserName= root;" +
-                        "Password=SQLDatabase404"))
+
+            using (MySqlConnection connection = new MySqlConnection(Connection))
             {
                 try
                 {
                     connection.Open();
-                    string query = "SELECT * FROM applicant_accounts";
+                    string query = "SELECT * FROM applicant_accounts WHERE id != @ExcludeUserId";
                     MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@ExcludeUserId", excludeUserId);
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -59,7 +56,8 @@ namespace Project_Polished_Version
                                 PhoneNumber = reader["Phone_Number"].ToString(),
                                 Gender = reader["gender"].ToString(),
                                 Address = reader["address"].ToString(),
-                                Id = Convert.ToInt32(reader["id"])
+                                Id = Convert.ToInt32(reader["id"]),
+                                Applicant_Photo = reader["Profile_Picture"] != DBNull.Value ? reader["Profile_Picture"].ToString() : null
                             };
                             applicantFeed.Add(item);
                         }
@@ -67,12 +65,14 @@ namespace Project_Polished_Version
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("Error retrieving data from the database: " + ex.Message);
                 }
             }
 
             return applicantFeed;
         }
+
+
         ApplicantUser user;
         private void Company_Profile(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -94,19 +94,40 @@ namespace Project_Polished_Version
 
             JobList.ItemsSource = filteredList;
         }
+
         private void viewProfile_btn(object sender, RoutedEventArgs e)
         {
-
-            if (JobList.SelectedItem is ApplicantUser selectedUser)
+            try
             {
-                this.Hide();
-                Applicant_Profile.windowNumber = 2;
+                if (JobList.SelectedItem is ApplicantUser selectedUser)
+                {
+                    if (selectedUser == null)
+                    {
+                        throw new NullReferenceException("The selected user is null.");
+                    }
 
-                Applicant_Profile userSelected = new Applicant_Profile(selectedUser);
-                userSelected.Show();
+                    // Open the Applicant_Profile window
+                    this.Hide();
+                    Applicant_Profile userProfile = new Applicant_Profile(selectedUser);
+                    userProfile.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a valid user from the list.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Critical Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unexpected error: {ex.Message}\nStackTrace: {ex.StackTrace}", "Critical Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         public static int As_WindowTracker;
+
         private void Back_Button(object sender, RoutedEventArgs e)
         {
             switch (As_WindowTracker)
@@ -122,8 +143,6 @@ namespace Project_Polished_Version
                     cd.Show();
                     break;
             }
-
         }
     }
 }
-

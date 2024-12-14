@@ -8,7 +8,6 @@
         Height="670" Width="1000"
         Title="UM HIRE"
         Icon="Images/UMHIREICON.ico"
-         AllowsTransparency="True"
          Background="Transparent"
          ResizeMode="NoResize"
          WindowStartupLocation="CenterScreen">
@@ -118,7 +117,7 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <Image Source="Images/Lorenz.jpg" HorizontalAlignment="Left" Height="149" Margin="694,25,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1"/>
+                <Image  x:Name="User_Profile"  Source="Images/Lorenz.jpg" HorizontalAlignment="Left" Height="149" Margin="694,25,0,0" VerticalAlignment="Top" Width="140" Grid.Column="1"/>
             </Grid>
         </Border>
 
@@ -128,7 +127,7 @@
                 <!-- About Section -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,10">
                     <TextBlock Text="About" Foreground="White" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" />
-                    <Button x:Name="abt_you_btn" Content="Edit" Width="123" Margin="10,0,0,0" Click="abt_you_btn_Click" Height="34" />
+                    <Button x:Name="abt_you_btn" Content="Edit" Width="123" Margin="10,0,0,0" Click="SaveAbout_Click" Height="34" />
                 </StackPanel>
                 <Border BorderBrush="#D3D3D3" BorderThickness="1" Padding="10" CornerRadius="10,10,10,10" Background="AliceBlue" Height="222" Width="960">
                     <TextBox x:Name="About_TextBox" IsReadOnly="True" Text="" AcceptsReturn="True" TextWrapping="Wrap" Margin="10,28,10,14" Width="918" Height="150" />
@@ -137,7 +136,7 @@
                 <!-- Experience Section -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,10">
                     <TextBlock Text="Experience" Foreground="White" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" Margin="0,20,0,0" />
-                    <Button x:Name="Edit_Experience_btn" Content="Edit" Width="100" Margin="10,20,0,0" HorizontalAlignment="Right" Click="Edit_Experience_btn_Click" />
+                    <Button x:Name="Edit_Experience_btn" Content="Edit" Width="100" Margin="10,20,0,0" HorizontalAlignment="Right" Click="SaveExperience_Click" />
                 </StackPanel>
                 <Border BorderBrush="#D3D3D3" BorderThickness="1" Padding="10" CornerRadius="10" Background="AliceBlue" Margin="0,0,0,20">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="200">
@@ -151,7 +150,7 @@
                 <!-- Education Section -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,20,0,10">
                     <TextBlock Text="Education" Foreground="White" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" />
-                    <Button x:Name="Education_Edit_btn" Content="Edit" Width="100" Margin="10,0,0,0" HorizontalAlignment="Right" Click="Education_Edit_btn_Click" />
+                    <Button x:Name="SaveEducation_btn" Content="Edit" Width="100" Margin="10,0,0,0" HorizontalAlignment="Right" Click="SaveEducation_Click" />
                 </StackPanel>
                 <Border BorderBrush="#D3D3D3" BorderThickness="1" Padding="10" CornerRadius="10" Background="AliceBlue">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="200">

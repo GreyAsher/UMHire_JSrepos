@@ -21,6 +21,7 @@ namespace Project_Polished_Version
     /// </summary>
     public partial class Company_Search : Window
     {
+        private static string Connection = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
         private List<CompanyUser> allCompanies = new List<CompanyUser>();
         public Company_Search()
         {
@@ -43,11 +44,9 @@ namespace Project_Polished_Version
         public static List<CompanyUser> User_DataBase()
         {
             List<CompanyUser> companyList = new List<CompanyUser>();
-            string connectionString = "Server=127.0.0.1;" +
-"Database=project_database;UserName= root;" +
-"Password=SQLDatabase404";
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+
+            using (MySqlConnection connection = new MySqlConnection(Connection))
             {
                 try
                 {

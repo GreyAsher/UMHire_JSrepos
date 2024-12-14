@@ -19,7 +19,7 @@ namespace Project_Polished_Version.Classes
         public int Applicant_Number { get; set; }
         public DateTime Submitted_Date { get; set; }
         public int Applicantion_Id { get; set; }
-
+        public string Email { get; set; }
         public string Resume_Job_Position { get; set; }
         public Resume() { }
     }

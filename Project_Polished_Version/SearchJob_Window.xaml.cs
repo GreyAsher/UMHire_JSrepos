@@ -13,12 +13,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Project_Polished_Version
 {
 
     public partial class SearchJob_Window : Window
     {
+        private static string connectionString = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%;Pooling=true";
         public SearchJob_Window()
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace Project_Polished_Version
         {
             List<Jobs> jobFeed = new List<Jobs>();
 
-            string connectionString = "Server=127.0.0.1;Database=project_database;UserName=root;Password=SQLDatabase404;Pooling=true";
+
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -85,28 +87,31 @@ namespace Project_Polished_Version
         }
 
         private int Company_Number = 0;
-        int Resume_Number = 1;
+        int _Resume_Number = 1;
         private void getJobs()
         {
             try
             {
-                string query = "INSERT INTO resume_db (Profile_Name, Profile_Number, Entry_Time, Status, CompanyId, ResumeNumber) " +
-                               "VALUES (@Profile_Name, @Profile_Number, @Entry_Time, @Status, @CompanyId, @ResumeNumber)";
+                string query = "INSERT INTO resume_db (Profile_Name, Profile_Number, Entry_Time, Status, CompanyId, ResumeNumber,Email,Position,Company_Name) " +
+                               "VALUES (@Profile_Name, @Profile_Number, @Entry_Time, @Status, @CompanyId, @ResumeNumber,@Email,@Position,@CompanyName)";
 
-                string name = MainWindow.userAccountsGetID[MainWindow.userID].First_Name + " " +
-                    MainWindow.userAccountsGetID[MainWindow.userID].Last_Name;
+                string name = MainWindow.userAccountsGetID[MainWindow.UserID].First_Name + " " +
+                    MainWindow.userAccountsGetID[MainWindow.UserID].Last_Name;
 
                 Resume Resume_Class = new Resume()
                 {
                     userProfile = name,
                     CompanyID_Number = Company_Number,
-                    Applicant_Number = MainWindow.userID,
+                    Applicant_Number = MainWindow.UserID,
                     Submitted_Date = DateTime.Now,
                     Status = "Pending",
-                    Resume_Number = Resume_Number,
+                    Resume_Number = _Resume_Number,
+                    Resume_Job_Position = MainWindow.userAccountsGetID[MainWindow.UserID].JobTitle,
+                    Company_Name = MainWindow.companyAccountsGetID[Company_Number].CompanyName,
+                    Email = MainWindow.UserEmail
                 };
 
-                using (MySqlConnection connection = new MySqlConnection("Server=127.0.0.1;Database=project_database;UserName=root;Password=SQLDatabase404"))
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -116,9 +121,11 @@ namespace Project_Polished_Version
                         command.Parameters.AddWithValue("@Profile_Number", Resume_Class.Applicant_Number);
                         command.Parameters.AddWithValue("@Entry_Time", Resume_Class.Submitted_Date);
                         command.Parameters.AddWithValue("@Status", Resume_Class.Status);
+                        command.Parameters.AddWithValue("@Position", Resume_Class.Resume_Job_Position);
+                        command.Parameters.AddWithValue("@CompanyName", Resume_Class.Company_Name);
                         command.Parameters.AddWithValue("@CompanyId", Resume_Class.CompanyID_Number);
                         command.Parameters.AddWithValue("@ResumeNumber", Resume_Class.Resume_Number);
-
+                        command.Parameters.AddWithValue("@Email", Resume_Class.Email);
                         // Execute the query
                         int rowsAffected = command.ExecuteNonQuery();
 

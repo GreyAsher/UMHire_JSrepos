@@ -26,6 +26,8 @@ namespace Project_Polished_Version.Classes
 
         public string Gender { get; set; }
 
+        public string Applicant_Photo { get; set; }
+
         //public ICollection<ApplicantUser> FriendsOf { get; set; } = new List<ApplicantUser>();
         //public ICollection<ApplicantUser> Connected_Applicants { get; set; } = new List<ApplicantUser>();
 

@@ -220,7 +220,11 @@
       <DependentUpon>Applicant_Tracker.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Applicant_Info.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="Classes\Resume.cs" />
+    <Compile Include="Company_Check.xaml.cs">
+      <DependentUpon>Company_Check.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Company_DashBoard.xaml.cs">
       <DependentUpon>Company_DashBoard.xaml</DependentUpon>
     </Compile>
@@ -243,6 +247,9 @@
     <Compile Include="Post_Resume.xaml.cs">
       <DependentUpon>Post_Resume.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Register_Company.xaml.cs">
+      <DependentUpon>Register_Company.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Register_Window.xaml.cs">
       <DependentUpon>Register_Window.xaml</DependentUpon>
     </Compile>
@@ -262,6 +269,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Applicant_Tracker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Company_Check.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Post_Resume.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Register_Company.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -401,6 +416,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\UMHIREICON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="Images\LOADSC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </SplashScreen>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />

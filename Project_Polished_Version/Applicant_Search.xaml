@@ -8,7 +8,6 @@
         Title="UM HIRE"
         Icon="Images/UMHIREICON.ico"
         Height="670" Width="1000"
-        AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">

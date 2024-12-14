@@ -1,0 +1,70 @@
+﻿<Window x:Class="Project_Polished_Version.Company_Check"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Polished_Version"
+        mc:Ignorable="d"
+       Height="670" Width="1000"
+        Title="UM HIRE"
+        Icon="Images/UMHIREICON.ico"
+
+        Background="AliceBlue"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Border Height="60" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <Border.Background>
+                <ImageBrush Stretch="None" ImageSource="Images/BlueZoom.jpg" AlignmentY="Top" AlignmentX="Center" />
+            </Border.Background>
+            <StackPanel Orientation="Horizontal" Background="Transparent">
+                <TextBlock Text="Applicant Checker" Foreground="White" FontSize="24" VerticalAlignment="Center" TextAlignment="Center" Width="800" />
+                <Button Content="Button"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Content Section -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Applicant List -->
+            <Border CornerRadius="10" BorderBrush="LightGray" BorderThickness="1" Grid.RowSpan="2">
+
+                <ListView Grid.Row="1" x:Name="Job_Sent_Table" ItemsSource="{Binding Applicants}" Margin="0,74,0,0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Applicant Name" Width="200" DisplayMemberBinding="{Binding userProfile}" />
+                            <GridViewColumn Header="Position" Width="200" DisplayMemberBinding="{Binding Resume_Job_Position}" />
+                            <GridViewColumn Header="Status" Width="200" DisplayMemberBinding="{Binding Status}" />
+                            <GridViewColumn Header="Actions" Width="200">
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
+            <Button x:Name="submit_Btn" Content="submit" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top"
+                     Width="58" Click="Submit_Btn"/>
+            <Button x:Name="Back_Btn" Content="Back" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top"
+                    Click="Back_Btn_Click" Width="58">
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

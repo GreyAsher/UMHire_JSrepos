@@ -15,6 +15,7 @@ namespace Project_Polished_Version
 {
     public partial class Applicant_DashBoard : Window
     {
+        string connectionString = "Server=127.0.0.1;Database=project_database;UserID=root;Password=SQLDatabase404;";
         public List<ApplicantUser> list = new List<ApplicantUser>();
         public List<string> names = new List<string>();
         public List<NewsFeed> nFeeds = new List<NewsFeed>();
@@ -33,10 +34,10 @@ namespace Project_Polished_Version
         {
             try
             {
-                nFeeds = await GetNewsFeedFromDatabaseAsync(); 
-                names = await Task.Run(() => getNames()); 
-                await LoadComboBoxDataAsync(); 
-                await LoadNewsfeedAsync(); 
+                nFeeds = await GetNewsFeedFromDatabaseAsync();
+                names = await Task.Run(() => getNames());
+                await LoadComboBoxDataAsync();
+                await LoadNewsfeedAsync();
 
                 Post_Resume.PostTracker = 1;
                 Applicant_Search.As_WindowTracker = 1;
@@ -46,25 +47,6 @@ namespace Project_Polished_Version
                 MessageBox.Show($"Initialization error: {ex.Message}", "Error", MessageBoxButton.OK);
             }
         }
-
-        //public Applicant_DashBoard()
-        //{
-        //    InitializeComponent();
-        //    try
-        //    {
-        //        nFeeds = GetNewsFeedFromDatabase();
-        //        names = getNames();
-        //        LoadComboBoxData();
-        //        LoadNewsfeed();
-        //        Post_Resume.PostTracker = 1;
-        //        Applicant_Search.As_WindowTracker = 1;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Initialization error: {ex.Message}", "Error", MessageBoxButton.OK);
-        //    }
-        //}
-
         private List<string> getNames()
         {
             List<string> names = new List<string>();
@@ -79,17 +61,16 @@ namespace Project_Polished_Version
         private async Task<List<NewsFeed>> GetNewsFeedFromDatabaseAsync()
         {
             var newsFeed = new List<NewsFeed>();
-            string connectionString = "Server=127.0.0.1;Database=project_database;UserName=root;Password=SQLDatabase404";
-
+            // string connectionString = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
             try
             {
                 using (var connection = new MySqlConnection(connectionString))
                 {
-                    await connection.OpenAsync(); 
+                    await connection.OpenAsync();
                     string query = "SELECT * FROM posts";
 
                     using (var cmd = new MySqlCommand(query, connection))
-                    using (var reader = await cmd.ExecuteReaderAsync()) 
+                    using (var reader = await cmd.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
@@ -112,94 +93,38 @@ namespace Project_Polished_Version
 
             return newsFeed;
         }
-
-        //private List<NewsFeed> GetNewsFeedFromDatabase()
-        //{
-        //    var newsFeed = new List<NewsFeed>();
-        //    string connectionString = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
-        //    using (var connection = new MySqlConnection(connectionString))
-        //    {
-        //        try
-        //        {
-        //            connection.Open();
-        //            string query = "SELECT * FROM posts";
-        //            using (var cmd = new MySqlCommand(query, connection))
-        //            using (var reader = cmd.ExecuteReader())
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    newsFeed.Add(new NewsFeed
-        //                    {
-        //                        Author = reader["company_name"].ToString(),
-        //                        Content = reader["Content"].ToString(),
-        //                        Photos = "Enter Photo here", // Placeholder for photo field
-        //                        Id = Convert.ToInt32(reader["post_id"]),
-        //                        UserID = Convert.ToInt32(reader["user_id"])
-        //                    });
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show($"Error fetching news feed: {ex.Message}", "Error", MessageBoxButton.OK);
-        //        }
-        //    }
-        //    return newsFeed;
-        //}
         private async Task LoadComboBoxDataAsync()
         {
-            string connectionString = "Server=127.0.0.1;Database=project_database;UserName=root;Password=SQLDatabase404";
-
             try
             {
                 using (var connection = new MySqlConnection(connectionString))
                 {
-                    await connection.OpenAsync(); 
+                    await connection.OpenAsync();
+                    MessageBox.Show("Connection opened successfully.");
+
                     string query = "SELECT first_name, last_name FROM applicant_accounts";
 
                     using (var cmd = new MySqlCommand(query, connection))
                     using (var adapter = new MySqlDataAdapter(cmd))
                     {
                         searchData = new DataTable();
-                        await Task.Run(() => adapter.Fill(searchData)); // Run fill on a separate thread
+                        await Task.Run(() => adapter.Fill(searchData));
+                        MessageBox.Show($"Data loaded successfully: {searchData.Rows.Count} rows.");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading combo box data: {ex.Message}", "Error", MessageBoxButton.OK);
+                MessageBox.Show($"Error loading combo box data: {ex.Message}\n{ex.StackTrace}", "Error", MessageBoxButton.OK);
             }
         }
 
-
-        //private void LoadComboBoxData()
-        //{
-        //    string connectionString = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
-        //    using (var connection = new MySqlConnection(connectionString))
-        //    {
-        //        try
-        //        {
-        //            connection.Open();
-        //            string query = "SELECT first_name, last_name FROM applicant_accounts";
-        //            using (var cmd = new MySqlCommand(query, connection))
-        //            using (var adapter = new MySqlDataAdapter(cmd))
-        //            {
-        //                searchData = new DataTable();
-        //                adapter.Fill(searchData);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show($"Error loading combo box data: {ex.Message}", "Error", MessageBoxButton.OK);
-        //        }
-        //    }
-        //}
         private async Task LoadNewsfeedAsync()
         {
             try
             {
-                nFeeds = await GetNewsFeedFromDatabaseAsync(); 
-                Newsfeed_ListBox.Items.Clear(); 
+                nFeeds = await GetNewsFeedFromDatabaseAsync();
+                Newsfeed_ListBox.Items.Clear();
 
                 foreach (var newsFeed in nFeeds)
                 {
@@ -211,22 +136,6 @@ namespace Project_Polished_Version
                 MessageBox.Show($"Error loading newsfeed: {ex.Message}", "Error", MessageBoxButton.OK);
             }
         }
-
-        //private void LoadNewsfeed()
-        //{
-        //    try
-        //    {
-        //        foreach (var newsFeed in nFeeds)
-        //        {
-        //            Newsfeed_ListBox.Items.Add(CreateNewsfeedItem(newsFeed.Author, newsFeed.Content));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error loading newsfeed: {ex.Message}", "Error", MessageBoxButton.OK);
-        //    }
-        //}
-
         private void Searched_Person(object sender, MouseEventArgs e)
         {
             if (sender is ListBox listBox && listBox.SelectedItem is string selectedName)
@@ -292,7 +201,7 @@ namespace Project_Polished_Version
                             Text = userName,
                             FontWeight = FontWeights.Bold,
                             Margin = new Thickness(5, 0, 5, 5),
-                            Foreground = Brushes.White 
+                            Foreground = Brushes.White
                         },
                         new TextBlock
                         {
@@ -374,7 +283,7 @@ namespace Project_Polished_Version
         {
             Inbox inbox = new Inbox();
             inbox.Show();
-  
+
         }
 
         private void Company_search(object sender, RoutedEventArgs e)
@@ -397,8 +306,8 @@ namespace Project_Polished_Version
         {
             try
             {
-                Newsfeed_ListBox.Items.Clear(); 
-                nFeeds = await GetNewsFeedFromDatabaseAsync(); 
+                Newsfeed_ListBox.Items.Clear();
+                nFeeds = await GetNewsFeedFromDatabaseAsync();
 
                 foreach (var newsFeed in nFeeds)
                 {
@@ -411,30 +320,13 @@ namespace Project_Polished_Version
             }
         }
 
-
-        //private void ReloadNewsfeed()
-        //{
-        //    try
-        //    {
-        //        Newsfeed_ListBox.Items.Clear(); // Clear the current items
-        //        nFeeds = GetNewsFeedFromDatabase(); // Fetch updated news feed from the database
-        //        foreach (var newsFeed in nFeeds)
-        //        {
-        //            Newsfeed_ListBox.Items.Add(CreateNewsfeedItem(newsFeed.Author, newsFeed.Content));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show($"Error reloading newsfeed: {ex.Message}", "Error", MessageBoxButton.OK);
-        //    }
-        //}
         private async void Add_Post(object sender, RoutedEventArgs e)
         {
             Post_Resume pr = new Post_Resume();
             pr.Closed += async (s, args) =>
             {
                 this.IsEnabled = true;
-                await ReloadNewsfeedAsync(); // Reload newsfeed asynchronously
+                await ReloadNewsfeedAsync();
             };
             pr.Show();
         }
@@ -457,18 +349,6 @@ namespace Project_Polished_Version
         {
 
         }
-
-
-        //private void Add_Post(object sender, RoutedEventArgs e)
-        //{
-        //    Post_Resume pr = new Post_Resume();
-        //    pr.Closed += (s, args) =>
-        //    {
-        //        this.IsEnabled = true;
-        //        ReloadNewsfeed(); 
-        //    };
-        //    pr.Show();
-        //}
     }
 }
 

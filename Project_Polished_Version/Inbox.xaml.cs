@@ -22,6 +22,7 @@ namespace Project_Polished_Version
     /// </summary>
     public partial class Inbox : Window
     {
+        private string _connection = "Server=localhost;Database=project_database;UserName=root;Password=Cedric1234%%";
         public Inbox()
         {
             InitializeComponent();
@@ -34,8 +35,7 @@ namespace Project_Polished_Version
             string query = "SELECT * FROM the_emails_db";
             try
             {
-                using (MySqlConnection connection = new MySqlConnection("Server=127.0.0.1;"
-                    + "Database=project_database;UserName= root;" + "Password=SQLDatabase404"))
+                using (MySqlConnection connection = new MySqlConnection(_connection))
                 {
                     connection.Open();
                     MySqlCommand cmd = new MySqlCommand(query, connection);
